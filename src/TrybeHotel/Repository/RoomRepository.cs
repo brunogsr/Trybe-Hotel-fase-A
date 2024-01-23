@@ -14,16 +14,39 @@ namespace TrybeHotel.Repository
         // 6. Desenvolva o endpoint GET /room/:hotelId
         public IEnumerable<RoomDto> GetRooms(int HotelId)
         {
-            throw new NotImplementedException(); 
+            var rooms = from r in _context.Rooms
+                        where r.HotelId == HotelId
+                        select new RoomDto
+                        {
+                            RoomId = r.RoomId,
+                            Name = r.Name,
+                            Capacity = r.Capacity,
+                            Image = r.Image,
+                            Hotel = (from hotel in _context.Hotels
+                                     where hotel.HotelId == HotelId
+                                     select new HotelDto()
+                                     {
+                                         HotelId = hotel.HotelId,
+                                         Name = hotel.Name,
+                                         Address = hotel.Address,
+                                         CityId = hotel.CityId,
+                                         CityName = (from c in _context.Cities
+                                                     where c.CityId == hotel.CityId
+                                                     select c.Name).FirstOrDefault()
+                                     }).FirstOrDefault()
+                        };
+            return rooms;
         }
 
         // 7. Desenvolva o endpoint POST /room
-        public RoomDto AddRoom(Room room) {
-            throw new NotImplementedException(); 
+        public RoomDto AddRoom(Room room)
+        {
+            throw new NotImplementedException();
         }
 
         // 8. Desenvolva o endpoint DELETE /room/:roomId
-        public void DeleteRoom(int RoomId) {
+        public void DeleteRoom(int RoomId)
+        {
             throw new NotImplementedException();
         }
     }

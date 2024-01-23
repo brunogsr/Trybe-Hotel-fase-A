@@ -26,14 +26,16 @@ namespace TrybeHotel.Controllers
         [HttpPost]
         public IActionResult PostRoom([FromBody] Room room)
         {
-            throw new NotImplementedException();
+            var roomDto = _repository.AddRoom(room);
+            return CreatedAtAction(nameof(GetRoom), new { id = roomDto.RoomId }, roomDto);
         }
 
         // 8. Desenvolva o endpoint DELETE /room/:roomId
         [HttpDelete("{RoomId}")]
         public IActionResult Delete(int RoomId)
         {
-            throw new NotImplementedException();
+            _repository.DeleteRoom(RoomId);
+            return NoContent();
         }
     }
 }
