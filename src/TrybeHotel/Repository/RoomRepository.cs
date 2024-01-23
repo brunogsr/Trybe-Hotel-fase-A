@@ -49,7 +49,6 @@ namespace TrybeHotel.Repository
                 Name = room.Name,
                 Capacity = room.Capacity,
                 Image = room.Image,
-                HotelId = room.HotelId,
                 Hotel = (from hotel in _context.Hotels
                          where hotel.HotelId == room.HotelId
                          select new HotelDto()
