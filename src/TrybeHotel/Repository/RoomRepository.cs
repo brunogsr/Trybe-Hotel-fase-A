@@ -58,7 +58,7 @@ namespace TrybeHotel.Repository
                              Address = hotel.Address,
                              CityId = hotel.CityId,
                              CityName = (from c in _context.Cities
-                                         where c.CityId == hotel.CityId
+                                         where hotel.CityId == c.CityId
                                          select c.Name).FirstOrDefault()
                          }).FirstOrDefault()
             };
