@@ -14,9 +14,21 @@ namespace TrybeHotel.Repository
         // 4. Desenvolva o endpoint GET /hotel
         public IEnumerable<HotelDto> GetHotels()
         {
-            throw new NotImplementedException();
+            var hotels = _context.Hotels;
+            var hotelsDto = new List<HotelDto>();
+            foreach (var hotel in hotels)
+            {
+                hotelsDto.Add(new HotelDto
+                {
+                    HotelId = hotel.HotelId,
+                    Name = hotel.Name,
+                    CityId = hotel.CityId,
+                    CityName = hotel.City.Name
+                });
+            }
+            return hotelsDto;
         }
-        
+
         // 5. Desenvolva o endpoint POST /hotel
         public HotelDto AddHotel(Hotel hotel)
         {
