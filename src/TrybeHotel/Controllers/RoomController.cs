@@ -26,8 +26,8 @@ namespace TrybeHotel.Controllers
         [HttpPost]
         public IActionResult PostRoom([FromBody] Room room)
         {
-            var roomDto = _repository.AddRoom(room);
-            return CreatedAtAction(nameof(GetRoom), new { id = roomDto.RoomId }, roomDto);
+            var newRoom = _repository.AddRoom(room);
+            return StatusCode(201, newRoom);
         }
 
         // 8. Desenvolva o endpoint DELETE /room/:roomId

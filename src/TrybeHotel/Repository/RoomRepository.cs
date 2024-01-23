@@ -49,6 +49,7 @@ namespace TrybeHotel.Repository
                 Name = room.Name,
                 Capacity = room.Capacity,
                 Image = room.Image,
+                HotelId = room.HotelId,
                 Hotel = (from hotel in _context.Hotels
                          where hotel.HotelId == room.HotelId
                          select new HotelDto()
@@ -58,7 +59,7 @@ namespace TrybeHotel.Repository
                              Address = hotel.Address,
                              CityId = hotel.CityId,
                              CityName = (from c in _context.Cities
-                                         where hotel.CityId == c.CityId
+                                         where c.CityId == hotel.CityId
                                          select c.Name).FirstOrDefault()
                          }).FirstOrDefault()
             };
